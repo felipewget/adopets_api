@@ -1,5 +1,6 @@
 import React,
        { Component }  from 'react';
+import { Button } from 'antd';
 
 class LogoutArea extends Component {
 
@@ -12,7 +13,7 @@ class LogoutArea extends Component {
 
     return (
       <div>
-          Logout
+          <Button type="primary" icon="logout" size="larger" />
       </div>
     );
 

@@ -2,6 +2,11 @@ import React,
        { Component }  from 'react';
 
 import LandingPage from './../../components/LandingPage';
+import SearchBlock from './../../components/SearchBlock';
+import LogoutArea from './../../components/LogoutArea';
+import SearchListResults from './../../components/SearchListResults';
+
+
 import { Layout } from 'antd';
 
 import {
@@ -77,16 +82,21 @@ class SearchScreen extends Component {
       <div className="App">
 
         <Header>
-          ola, eu sou goku
+          
+          {/* // AKI VAI FICA A LOGOMARCA */}
+          <LogoutArea />
 
         </Header>
 
         <Content>
-adad
+
+          <SearchBlock />
+          <SearchListResults />
+
         </Content>
 
         <Footer>
-          Ola, sou o footer
+          <p>Desenvolvido com muito carinho por <a>Felipe Oliveira</a></p>
         </Footer>
         
       </div>
