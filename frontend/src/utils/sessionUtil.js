@@ -10,9 +10,10 @@ export const saveSession = async (username, access_key) => {
 export const checkSession = async () => {
 
     let access_key = localStorage.getItem('access_key');
+
     let auth = true;
 
-    if( access_key && access_key === undefined || access_key === null || access_key === "" ){
+    if( access_key === undefined || access_key === null || access_key === "" ){
         auth = false;
     }
 

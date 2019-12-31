@@ -25,7 +25,6 @@ class LogoutArea extends Component {
             className="float-right"
             type="primary" 
             icon="logout" 
-            size="larger" 
             onClick={ () => { funcLogout(); }} />
 
           <p className="float-right margin-right-15">{username}</p>

@@ -1,7 +1,7 @@
 import React,
        { Component }  from 'react';
 
-import { Skeleton, Switch, Button, Card, Meta, Icon, Avatar,Row, Col } from 'antd';
+import { Button, Card, Row } from 'antd';
 
 
 class SearchListResults extends Component {
@@ -68,7 +68,7 @@ class SearchListResults extends Component {
 
         return(
             
-            <div>
+            <div key={i}>
                 <Card data-card-result loading={true}></Card>
             </div>
             
@@ -96,13 +96,15 @@ class SearchListResults extends Component {
 
                         // I`m add param I because if not, give-me same image
                         let url_image = "https://source.unsplash.com/500x300/?" + obj_pet.specie.name + "&i=" + i;
+                        let description_img = 'Pet Image - ' + obj_pet.id;
+                        let el_img = <img src={url_image} alt={description_img} />
 
                         return(
                             
-                                <div>
+                                <div key={i}>
                                     <Card
                                         data-card-result
-                                        cover={<img src={url_image} />}
+                                        cover={el_img}
                                         actions={[
                                             <p>R$ {parseFloat(obj_pet.price).toFixed(2)}</p>,
                                             <Button>Ver mais</Button>,
@@ -155,7 +157,7 @@ class SearchListResults extends Component {
         <div data-component="search-list-results">
 
             {
-                searching == true && page < 1
+                searching === true && page < 1
                 ? this.loadingCards()
                 : this.processResults()
             }

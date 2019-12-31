@@ -149,7 +149,6 @@ class SearchScreen extends Component {
     const { 
       Header, 
       Footer, 
-      Sider, 
       Content 
     } = Layout;
 
@@ -193,7 +192,7 @@ class SearchScreen extends Component {
         </Content>
 
         <Footer>
-          <p>Desenvolvido com muito carinho por <a>Felipe Oliveira</a></p>
+          <p>Desenvolvido com muito carinho por <a href="https://www.linkedin.com/in/felipe-oliveira-a85676190/" target="_blank" rel="noopener noreferrer">Felipe Oliveira</a></p>
         </Footer>
         
       </div>

@@ -1,7 +1,7 @@
 import React,
        { Component }  from 'react';
 
-import { Spin, Icon } from 'antd';
+import { Icon } from 'antd';
 
 class Loader extends Component {
 
