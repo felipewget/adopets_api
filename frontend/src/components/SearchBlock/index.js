@@ -18,6 +18,24 @@ class SearchBlock extends Component {
       }
   }
 
+  static getDerivedStateFromProps(props, state)
+  {
+
+    return {
+        searching: props.searching ? props.searching : false
+    }
+
+  }
+
+  async search()
+  {
+
+    let { funcSearch } = this.props;
+    
+    await funcSearch();
+
+  }
+
   render() {
 
     let {
@@ -31,7 +49,7 @@ class SearchBlock extends Component {
                 actions={[
                     <Button type="primary" 
                             loading={searching} 
-                            onClick={ () => { this.setState({searching: true}) } } >
+                            onClick={ () => { this.search() } } >
                     Search
                     </Button>
                 ]} >

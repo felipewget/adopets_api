@@ -6,18 +6,16 @@ import SearchBlock from './../../components/SearchBlock';
 import LogoutArea from './../../components/LogoutArea';
 import SearchListResults from './../../components/SearchListResults';
 
+import { notify } from './../../utils/notificationUtil';
 
 import { Layout } from 'antd';
 
-import {
-  createSession,
-  registerUser
-}                     from './../../actions/authAction';
 import { searchPet }  from './../../actions/searchAction';
 
 import {
   deleteSession,
-  checkSession
+  checkSession,
+  getUsername
 } from './../../utils/sessionUtil';
 
 /**
@@ -30,10 +28,16 @@ class SearchScreen extends Component {
 
     super();
     this.state = {
-      loading: true
+      loading: true,
+      loading_researching: false,
+      has_more_results: false,
+      page: 0,
+      results: []
     };
 
     this.logout = this.logout.bind(this);
+    this.search = this.search.bind(this);
+    this.loadMore = this.loadMore.bind(this);
 
   }
 
@@ -65,6 +69,73 @@ class SearchScreen extends Component {
 
   }
 
+  async loadMore()
+  {
+
+    let { page } = this.state;
+
+    ++page;
+
+    this.search( page );
+
+  }
+
+  async search( page = 1 )
+  {
+
+    let self = this;
+
+    let { results } = this.state;
+    
+    await this.setState({ loading_researching: true });
+
+    let response = await searchPet( page );
+
+    if( response.status === 200 && response.code === 200 ){
+
+      let has_more = false;
+      let {
+        page,
+        pages,
+        result
+      } = response.data
+
+      if( page < pages ){
+        has_more = true;
+      }
+
+      if( page > 1 ){
+
+        for( let i in result ){
+          results.push( result[i] );
+        }
+
+        result = results;
+
+      }
+
+      await this.setState({ 
+        loading_researching: false,
+        has_more_results: has_more,
+        results: result,
+        page: page
+      });
+
+      return true;
+
+    } else {
+
+      notify("Erro ao realizar a pesquisa", "Acesso negado");
+      setTimeout( () => {
+        self.logout();
+      })
+
+    }
+
+    
+
+  }
+
   processPage()
   {
 
@@ -75,21 +146,39 @@ class SearchScreen extends Component {
       Content 
     } = Layout;
 
+    let {
+      loading_researching,
+      has_more_results,
+      results,
+      page
+    } = this.state;
+
     return (
       <div className="App">
 
         <Header>
           
-          {/* // AKI VAI FICA A LOGOMARCA */}
+          <i data-logo></i>
+
           <LogoutArea 
+            username={getUsername()}
             funcLogout={this.logout} />
+
 
         </Header>
 
         <Content>
 
-          <SearchBlock />
-          <SearchListResults />
+          <SearchBlock 
+            funcSearch={this.search}
+            searching={loading_researching} />
+            
+          <SearchListResults 
+            funcLoadMore={this.loadMore}
+            searching={loading_researching} 
+            results={results}
+            page={page}
+            has_more={has_more_results} />
 
         </Content>
 

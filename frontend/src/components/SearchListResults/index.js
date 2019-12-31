@@ -12,9 +12,23 @@ class SearchListResults extends Component {
 
       this.state = {
           searched: false,
-          loading: false,
-          results: [{teste: "aodada"}]
+          searching: false,
+          page: 0,
+          results: [],
+          has_more: false
       }
+  }
+
+  static getDerivedStateFromProps(props, state)
+  {
+
+    return {
+        searching: props.searching ? props.searching : false,
+        results: props.results ? props.results : false,
+        has_more: props.has_more ? props.has_more : false,
+        page: props.page ? props.page : false
+    }
+
   }
 
   loadingCards()
@@ -33,9 +47,7 @@ class SearchListResults extends Component {
                     return(
                         <Col span={6} key={i}>
                             <div>
-                                <Card style={{ margin: 16 }} loading={true}>
-                                    osidjasiodjaosidj
-                                </Card>
+                                <Card style={{ margin: 16 }} loading={true}></Card>
                             </div>
                         </Col>
                     );
@@ -50,9 +62,11 @@ class SearchListResults extends Component {
 
     let { 
         results,
-        searched 
+        searched,
+        has_more
     } = this.state;
 
+    let { funcLoadMore } = this.props;
 
     let { Meta } = Card;
 
@@ -90,7 +104,13 @@ class SearchListResults extends Component {
                         })
                     }
                 </Row>
-                <Button>To Load More</Button>
+
+                {
+                    has_more
+                        ? <Button onClick={ () => { funcLoadMore(); }}>To Load More</Button>
+                        : null
+                }
+                
             </div>
         )
 
@@ -112,11 +132,31 @@ class SearchListResults extends Component {
 
   render() {
 
-    let { loading } = this.state;
+    let { 
+        searching,
+        page 
+    } = this.state;
 
-    return loading
-            ? this.loadingCards()
-            : this.processResults()
+    return (
+        <div>
+
+            {
+                searching == true && page < 2
+                ? null
+                : this.processResults()
+            }
+
+            {
+                searching
+                ? this.loadingCards()
+                : null
+            }
+
+        </div>
+    )
+    // return searching
+    //         ? this.loadingCards()
+    //         : this.processResults()
 
   }
 }

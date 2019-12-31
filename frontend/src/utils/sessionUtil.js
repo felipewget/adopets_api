@@ -28,3 +28,7 @@ export const deleteSession = async () => {
     return true; 
 
 }
+
+export const getUsername = () => {
+    return localStorage.getItem('username');
+}
