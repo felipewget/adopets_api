@@ -110,9 +110,11 @@ class SearchBlock extends Component {
                         <Select defaultValue="5" 
                                 onChange={this.changeLimit}
                                 className="float-right" >
-                            <Option value="3">3</Option>
-                            <Option value="5">5</Option>
-                            <Option value="10">10</Option>
+                            {
+                                ['3','5','10'].map( ( value, i ) => {
+                                    return (<Option key={i} value={value}>{value}</Option>)
+                                })
+                            }
                         </Select>
                         
                     </div>
@@ -125,8 +127,11 @@ class SearchBlock extends Component {
                             <label data-title>Gender</label>
                             <Radio.Group defaultValue="all" buttonStyle="solid"  >
                                 <Radio.Button value="all" onClick={ () => this.updateField( "gender", null ) }>All</Radio.Button>
-                                <Radio.Button value="female" onClick={ () => this.updateField( "gender", "female" ) }>Female</Radio.Button>
-                                <Radio.Button value="male" onClick={ () => this.updateField( "gender", "female" ) }>Male</Radio.Button>
+                                {
+                                    ['Female','Male'].map( ( value, i ) => {
+                                        return (<Radio.Button key={i} value={value} onClick={ () => this.updateField( "gender", value ) } >{value}</Radio.Button>)
+                                    })
+                                }
                             </Radio.Group>
                         </div>
                     </Col>
@@ -136,10 +141,11 @@ class SearchBlock extends Component {
                             <label data-title>Size</label>
                             <Radio.Group defaultValue="all" buttonStyle="solid">
                                 <Radio.Button value="all" onClick={ () => this.updateField( "size", null ) } >All</Radio.Button>
-                                <Radio.Button value="s" onClick={ () => this.updateField( "size", "s" ) } >S</Radio.Button>
-                                <Radio.Button value="m" onClick={ () => this.updateField( "size", "m" ) } >M</Radio.Button>
-                                <Radio.Button value="l" onClick={ () => this.updateField( "size", "l" ) } >L</Radio.Button>
-                                <Radio.Button value="xl" onClick={ () => this.updateField( "size", "xl" ) } >XL</Radio.Button>
+                                {
+                                    ['S','M','L','XL'].map( ( value, i ) => {
+                                        return (<Radio.Button key={i} value={value} onClick={ () => this.updateField( "size", value ) } >{value}</Radio.Button>)
+                                    })
+                                }
                             </Radio.Group>
                         </div>
                     </Col>
@@ -149,10 +155,11 @@ class SearchBlock extends Component {
                             <label data-title>Age</label>
                             <Radio.Group defaultValue="all" buttonStyle="solid">
                                 <Radio.Button value="all" onClick={ () => this.updateField( "age", null ) } >All</Radio.Button>
-                                <Radio.Button value="baby" onClick={ () => this.updateField( "age", "baby" ) } >BABY</Radio.Button>
-                                <Radio.Button value="young" onClick={ () => this.updateField( "age", "young" ) }>YOUNG</Radio.Button>
-                                <Radio.Button value="adult" onClick={ () => this.updateField( "age", "adult" ) }>ADULT</Radio.Button>
-                                <Radio.Button value="senior" onClick={ () => this.updateField( "age", "senior" ) } >SENIOR</Radio.Button>
+                                {
+                                    ['Baby','Young','Adult','Senior'].map( ( value, i ) => {
+                                        return (<Radio.Button key={i} value={value} onClick={ () => this.updateField( "age", value ) } >{value}</Radio.Button>)
+                                    })
+                                }
                             </Radio.Group>
                         </div>
                     </Col>

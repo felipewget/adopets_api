@@ -65,12 +65,12 @@ class FormLogin extends React.Component {
               getFieldDecorator('username', {
                 rules: [
                   { required: true, message: 'Please input your E-mail!' }, 
-                  { type: 'email',  message: 'The input is not valid E-mail!' }
+                  { type: 'email',  message: 'The input is not a valid E-mail!' }
                 ],
               })(
                 <Input
-                  prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="e-mail"
+                  prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  placeholder="E-mail"
                 />,
               )
             }

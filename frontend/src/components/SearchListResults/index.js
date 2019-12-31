@@ -32,7 +32,7 @@ class SearchListResults extends Component {
       return (
             <div data-block-detail>
                 <i data-dog-research></i>
-                <p>Encontre seu amigao</p>
+                <p>Find your friend</p>
             </div>
       )
   }
@@ -42,7 +42,7 @@ class SearchListResults extends Component {
       return (
             <div data-block-detail>
                 <i data-no-result></i>
-                <p>Nenhum pet encontrado</p>
+                <p>No pets found</p>
             </div>
       )
   }
@@ -113,16 +113,16 @@ class SearchListResults extends Component {
                                         data-card-result
                                         cover={el_img}
                                         actions={[
-                                            <p>R$ {parseFloat(obj_pet.price).toFixed(2)}</p>,
-                                            <Button>Ver mais</Button>,
+                                            <p data-price>R$ {parseFloat(obj_pet.price).toFixed(2)}</p>,
+                                            <Button>See More</Button>,
                                         ]} >
 
                                         <Meta title={obj_pet.name} />
                                         <p>{obj_pet.specie.name}</p>
-                                        <p>{obj_pet.sex_key}</p>
-                                        <p>{obj_pet.size_key}</p>
-                                        <p>{obj_pet.age_key}</p>
-                                        <p>{obj_pet.status_key}</p>
+                                        <p data-description><span>Gender: </span>{obj_pet.sex_key}</p>
+                                        <p data-description><span>Size: </span>{obj_pet.size_key}</p>
+                                        <p data-description><span>Age: </span>{obj_pet.age_key}</p>
+                                        <p data-disponibility>{obj_pet.status_key}</p>
                                             
                                     </Card>
                                 </div>
@@ -177,7 +177,7 @@ class SearchListResults extends Component {
 
             {
                 has_more && has_more === true
-                    ? <Button data-load-more onClick={ () => { funcLoadMore(); }}>To Load More</Button>
+                    ? <Button data-load-more onClick={ () => { funcLoadMore(); }}>Load More</Button>
                     : null
             }
 
