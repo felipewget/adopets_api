@@ -1,9 +1,13 @@
+/**
+ * 404 Page
+ * 
+ * @version 0.0.1
+ * @author Fe Oliveira<fe.get@outlook.com>
+ */
+
 import React,
        { Component }  from 'react';
 
-/**
- *  Tela de busca por um pet
- */
 class Page404 extends Component {
 
   constructor()
@@ -21,7 +25,7 @@ class Page404 extends Component {
   render() {
 
     return (
-      <div>Page 404</div>
+      <div data-page="page404">Page 404</div>
     );
 
   }

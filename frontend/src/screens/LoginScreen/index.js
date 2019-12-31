@@ -1,3 +1,10 @@
+/**
+ * Login Page
+ * 
+ * @version 0.0.1
+ * @author Fe Oliveira<fe.get@outlook.com>
+ */
+
 import React,
        { Component }  from 'react';
 
@@ -16,17 +23,13 @@ import FormLogin    from './../../components/FormLogin';
 import LandingPage  from './../../components/LandingPage';
 import Loader       from './../../components/Loader';
 
-// @TODO validade email <----
-
-/**
- *  Tela de busca por um pet
- */
 class LoginScreen extends Component {
 
   constructor()
   {
 
     super();
+
     this.state = {
         form_loading: false,
         loading: true
@@ -63,7 +66,6 @@ class LoginScreen extends Component {
 
             notify("Falha no login", response.message )
             this.setState({ form_loading: false });
-            // console.error("Erro ao autenticar um usuario");
 
       }
 
@@ -71,7 +73,6 @@ class LoginScreen extends Component {
         
         notify("Falha no login", "Erro ao criar uma sessao" )
         this.setState({ form_loading: false });
-        // console.error("Erro ao criar uma sessao:", response );
         
     }
 
@@ -79,7 +80,6 @@ class LoginScreen extends Component {
 
   async componentDidMount(){
 
-    // Check Login
     let response_check_session = await checkSession();
 
     if( response_check_session ){

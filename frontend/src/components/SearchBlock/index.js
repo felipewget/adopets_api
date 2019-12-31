@@ -1,3 +1,10 @@
+/**
+ * Search block with form and event about research
+ * 
+ * @version 0.0.1
+ * @author Fe Oliveira<fe.get@outlook.com>
+ */
+
 import React,
        { Component }  from 'react';
 

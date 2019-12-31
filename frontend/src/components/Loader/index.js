@@ -1,3 +1,10 @@
+/**
+ * This component is a loader that can used in many application places
+ * 
+ * @version 0.0.1
+ * @author Fe Oliveira<fe.get@outlook.com>
+ */
+
 import React,
        { Component }  from 'react';
 
@@ -14,7 +21,7 @@ class Loader extends Component {
 
     return (
       <div data-component="loader">
-          <Icon type="loading" style={{ fontSize: 24 }} spin />
+          <Icon type="loading" spin />
       </div>
     );
 

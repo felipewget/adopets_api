@@ -1,3 +1,10 @@
+/**
+ * Render pet results and sent event to load more(pagination) of records
+ * 
+ * @version 0.0.1
+ * @author Fe Oliveira<fe.get@outlook.com>
+ */
+
 import React,
        { Component }  from 'react';
 

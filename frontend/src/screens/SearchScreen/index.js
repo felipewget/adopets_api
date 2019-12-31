@@ -1,3 +1,10 @@
+/**
+ * Search Page
+ * 
+ * @version 0.0.1
+ * @author Fe Oliveira<fe.get@outlook.com>
+ */
+
 import React,
        { Component }  from 'react';
 
@@ -18,9 +25,6 @@ import {
   getUsername
 } from './../../utils/sessionUtil';
 
-/**
- *  Tela de busca por um pet
- */
 class SearchScreen extends Component {
 
   constructor()

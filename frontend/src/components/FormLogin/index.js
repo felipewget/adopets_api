@@ -1,8 +1,18 @@
+/**
+ * FormLogin is the component responsable per validation and send form event 
+ * 
+ * @version 0.0.1
+ * @author Fe Oliveira<fe.get@outlook.com>
+ */
+
 import React  from 'react';
 import { Form, Icon, Input, Button } from 'antd';
 
 class FormLogin extends React.Component {
 
+  /**
+   * Contructor
+   */
   constructor( props )
   {
 
@@ -17,6 +27,11 @@ class FormLogin extends React.Component {
     return Object.keys(fields_error).some( field => fields_error[field] );
   }
 
+  /**
+   * Send form
+   * 
+   * @param {Obj<event>} e
+   */
   handleSubmit( e )
   {
 

@@ -1,3 +1,10 @@
+/**
+ * This component is responsable about render logout button and details
+ * 
+ * @version 0.0.1
+ * @author Fe Oliveira<fe.get@outlook.com>
+ */
+
 import React,
        { Component }  from 'react';
 import { Button } from 'antd';
@@ -27,6 +34,7 @@ class LogoutArea extends Component {
             icon="logout" 
             onClick={ () => { funcLogout(); }} />
 
+          {/* If there is username prop, render name in right side of logout button */}
           <p className="float-right margin-right-15">{username}</p>
 
       </div>

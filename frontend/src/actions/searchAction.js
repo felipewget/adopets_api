@@ -1,8 +1,21 @@
+/**
+ * There are useful actions/requests methods about research
+ * 
+ * @version 0.0.1
+ * @author Fe Oliveira<fe.get@outlook.com>
+ */
+
 import  axios from 'axios';
 import  { 
     API_URL
 } from './../constants';
 
+/**
+ * This request is responsable per pets research
+ * 
+ * @param {Obj} setting Settings has filters in request
+ * @param {Int} page    Is the number of pagination
+ */
 export const searchPet = async ( setting, page ) => {
 
     let access_key = localStorage.getItem('access_key');

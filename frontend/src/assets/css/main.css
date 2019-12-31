@@ -40,6 +40,7 @@ div[data-page="login"] .ant-form-inline .ant-form-item-with-help {
 div[data-page="login"] div[data-component="loader"],
 div[data-page="login"] div[data-component="loader"] i {
     display: block;
+    font-size: 24px;
 }
 
 div[data-component="landing-page"] {
@@ -154,4 +155,14 @@ div[data-block-detail] p {
 
 div[data-block-detail] i[data-no-result] {
     background: url(./../imgs/paws.svg)no-repeat;
+}
+
+div[data-page="page404"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;  
+    font-size: 22px; 
 }
