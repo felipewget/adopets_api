@@ -11,9 +11,15 @@ class LogoutArea extends Component {
 
   render() {
 
+    let { funcLogout } = this.props;
+
     return (
       <div>
-          <Button type="primary" icon="logout" size="larger" />
+          <Button 
+            type="primary" 
+            icon="logout" 
+            size="larger" 
+            onClick={ () => { funcLogout(); }} />
       </div>
     );
 

@@ -17,9 +17,15 @@ class FormLogin extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
+    let { funcAuth } = this.props;
+    
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+
+        funcAuth( values.username, values.password );
+
       }
     });
   };

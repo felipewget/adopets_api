@@ -15,6 +15,11 @@ import {
 }                     from './../../actions/authAction';
 import { searchPet }  from './../../actions/searchAction';
 
+import {
+  deleteSession,
+  checkSession
+} from './../../utils/sessionUtil';
+
 /**
  *  Tela de busca por um pet
  */
@@ -28,43 +33,35 @@ class SearchScreen extends Component {
       loading: true
     };
 
-  }
-
-  async auth()
-  {
-
-    let response = await createSession();
-    if( response.status === 200 && response.code === 200 ){
-
-      let { access_key } = response.data;
-      
-      response = await registerUser( "usuario-test@adopets.com", "123123", access_key );
-
-      if( response.status === 200 && response.code === 200 ){
-        console.log( response );
-
-        let {
-          organization_user,
-          access_key
-        } = response.data;
-
-      } else {
-        console.error("Erro ao autenticar um usuario");
-      }
-
-    } else {
-      console.error("Erro ao criar uma sessao:", response );
-    }
+    this.logout = this.logout.bind(this);
 
   }
 
   async componentDidMount(){
 
     // Check if autheticated
-    
-    this.setState({
-      loading: false
-    })
+    let response_check_session = await checkSession();
+
+    if( response_check_session ){
+
+      this.setState({
+        loading: false
+      })
+
+    } else {
+
+      deleteSession();
+      window.location.href="/login";
+
+    }
+
+  }
+
+  async logout()
+  {
+
+    deleteSession();
+    window.location.href="/login";
 
   }
 
@@ -84,7 +81,8 @@ class SearchScreen extends Component {
         <Header>
           
           {/* // AKI VAI FICA A LOGOMARCA */}
-          <LogoutArea />
+          <LogoutArea 
+            funcLogout={this.logout} />
 
         </Header>
 
