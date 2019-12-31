@@ -55,3 +55,103 @@ div[data-component="landing-page"],
 div[data-component="landing-page"] i {
     display: block;   
 }
+
+div[data-component="search-block"],
+div[data-component="search-list-results"] {
+    margin: 20px;
+}
+
+div[data-component="search-block"] label[data-title] {
+    margin-right: 10px;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}  
+
+.margin-right-15 {
+    margin-right: 15px;
+}
+
+.margin-left-15 {
+    margin-left: 15px;
+}
+
+div[data-page="search-screen"] {}
+
+div[data-page="search-screen"] header i {
+    margin-top: 10px;
+}
+
+div[data-page="search-screen"] header button {
+    margin-top: 15px;
+}
+
+div[data-page="search-screen"] header button i {
+    margin-top: 0px;
+}
+
+div[data-page="search-screen"] header p {
+    color: #FFF;
+}
+
+div[data-card-result] {
+    width: 300px;
+    min-height: 480px;
+    margin: auto;
+    margin: 10px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+div[data-component="search-list-results"] .ant-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+div[data-page="search-screen"] footer {
+    border-top: solid 1px #DDD;
+    background: #FFF;
+    margin: 0px 20px;
+    text-align: center;
+    height: 21px;
+    line-height: 0px;
+    font-size: 12px;
+}
+
+button[data-load-more] {
+    margin: 0 auto;
+    float: inherit;
+    display: block;
+}
+
+i[data-dog-research],
+div[data-block-detail] i[data-no-result] {
+    background: url(./../imgs/image_dog.svg)no-repeat;
+    background-size: 100% auto;
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+div[data-block-detail] {
+    margin: 100px 0px;
+}
+
+div[data-block-detail] p {
+    text-align: center;
+}
+
+div[data-block-detail] i[data-no-result] {
+    background: url(./../imgs/paws.svg)no-repeat;
+}

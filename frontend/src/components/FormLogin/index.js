@@ -41,7 +41,10 @@ class FormLogin extends React.Component {
       <Form layout="inline" onSubmit={this.handleSubmit}>
         <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
           {getFieldDecorator('username', {
-            rules: [{ required: true, message: 'Please input your username!' }],
+            rules: [{ required: true, message: 'Please input your username!' }, {
+              type: 'email',
+              message: 'The input is not valid E-mail!',
+            }],
           })(
             <Input
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}

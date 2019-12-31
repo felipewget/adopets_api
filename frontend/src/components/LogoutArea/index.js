@@ -20,12 +20,16 @@ class LogoutArea extends Component {
 
     return (
       <div>
-          <p>{username}</p>
+          
           <Button 
+            className="float-right"
             type="primary" 
             icon="logout" 
             size="larger" 
             onClick={ () => { funcLogout(); }} />
+
+          <p className="float-right margin-right-15">{username}</p>
+
       </div>
     );
 

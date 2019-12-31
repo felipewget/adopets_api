@@ -3,13 +3,19 @@ import  {
     API_URL
 } from './../constants';
 
-export const searchPet = async ( page ) => {
+export const searchPet = async ( setting, page ) => {
 
     let access_key = localStorage.getItem('access_key');
 
+    let {
+        gender,
+        size,
+        age,
+        limit
+    } = setting;
+
     let params = {
         "search": {
-            "sex_key": "FEMALE",
             "_fields": [
                 "id",
                 "uuid",
@@ -54,10 +60,22 @@ export const searchPet = async ( page ) => {
         },
         "options": {
             "page": page,
-            "limit": 5,
+            "limit": limit,
             "sort": []
         }
     };
+
+    if( gender !== undefined && gender !== null ){
+        params.search.sex_key = gender.toUpperCase();
+    }
+
+    if( size !== undefined && size !== null ){
+        params.search.size_key = size.toUpperCase();
+    }
+
+    if( age !== undefined && age !== null ){
+        params.search.age_key = age.toUpperCase();
+    }
 
     let response = await axios.post( API_URL + '/pet/search', params, {
         headers: { "Authorization": "Bearer " + access_key }

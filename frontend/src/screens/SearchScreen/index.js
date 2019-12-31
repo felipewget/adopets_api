@@ -72,24 +72,32 @@ class SearchScreen extends Component {
   async loadMore()
   {
 
-    let { page } = this.state;
+    let { 
+      page,
+      setting 
+    } = this.state;
 
     ++page;
 
-    this.search( page );
+    this.search( setting, page );
 
   }
 
-  async search( page = 1 )
+  async search( setting, page = 1 )
   {
 
     let self = this;
 
-    let { results } = this.state;
+    let { 
+      results
+    } = this.state;
     
-    await this.setState({ loading_researching: true });
+    await this.setState({ 
+      loading_researching: true,
+      results: page < 2 ? [] : results
+    });
 
-    let response = await searchPet( page );
+    let response = await searchPet( setting, page );
 
     if( response.status === 200 && response.code === 200 ){
 
@@ -118,7 +126,8 @@ class SearchScreen extends Component {
         loading_researching: false,
         has_more_results: has_more,
         results: result,
-        page: page
+        page: page,
+        setting: setting
       });
 
       return true;
@@ -131,8 +140,6 @@ class SearchScreen extends Component {
       })
 
     }
-
-    
 
   }
 
@@ -150,15 +157,17 @@ class SearchScreen extends Component {
       loading_researching,
       has_more_results,
       results,
-      page
+      page,
+      setting
     } = this.state;
 
     return (
-      <div className="App">
+      <div data-page="search-screen">
 
         <Header>
           
-          <i data-logo></i>
+          <i  data-logo
+              className="float-left"></i>
 
           <LogoutArea 
             username={getUsername()}
@@ -178,6 +187,7 @@ class SearchScreen extends Component {
             searching={loading_researching} 
             results={results}
             page={page}
+            limit={setting && setting.limit && setting.limit > 0 ? setting.limit : 10 }
             has_more={has_more_results} />
 
         </Content>

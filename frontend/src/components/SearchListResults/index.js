@@ -12,49 +12,69 @@ class SearchListResults extends Component {
 
       this.state = {
           searched: false,
-          searching: false,
+          searching: true,
           page: 0,
           results: [],
-          has_more: false
+          has_more: false,
+          limit: 10
       }
+  }
+
+  makeResearchBlock()
+  {
+      return (
+            <div data-block-detail>
+                <i data-dog-research></i>
+                <p>Encontre seu amigao</p>
+            </div>
+      )
+  }
+
+  noResultBlock()
+  {
+      return (
+            <div data-block-detail>
+                <i data-no-result></i>
+                <p>Nenhum pet encontrado</p>
+            </div>
+      )
   }
 
   static getDerivedStateFromProps(props, state)
   {
 
     return {
+        limit: props.limit ? props.limit : 10,
         searching: props.searching ? props.searching : false,
         results: props.results ? props.results : false,
         has_more: props.has_more ? props.has_more : false,
-        page: props.page ? props.page : false
+        page: props.page ? props.page : false,
+        searched: state.searched === false ? props.searching : true
     }
 
   }
 
   loadingCards()
   {
+
+    let { limit } = this.state;
     
     let arr_loading_cards = [];
-    for( let i = 0; i<18; i++ ){
+    for( let i = 0; i<limit; i++ ){
         arr_loading_cards.push( true);
     }
     
-    return (
-        <Row>
-            {
-                arr_loading_cards.map( ( obj, i ) => {
-                    console.log('chegou aki')
-                    return(
-                        <Col span={6} key={i}>
-                            <div>
-                                <Card style={{ margin: 16 }} loading={true}></Card>
-                            </div>
-                        </Col>
-                    );
-                })
-            }
-        </Row>
-    )
+    return arr_loading_cards.map( ( obj, i ) => {
+
+        return(
+            
+            <div>
+                <Card data-card-result loading={true}></Card>
+            </div>
+            
+        );
+    })
+
   }
 
   processResults()
@@ -63,70 +83,60 @@ class SearchListResults extends Component {
     let { 
         results,
         searched,
-        has_more
+        searching
     } = this.state;
 
-    let { funcLoadMore } = this.props;
-
     let { Meta } = Card;
+    
+    return (
+        <div>
+            <Row>
+                {
+                    results && results.map( ( obj_pet, i ) => {
 
-    if( results && results.length > 0 ) {
+                        // I`m add param I because if not, give-me same image
+                        let url_image = "https://source.unsplash.com/500x300/?" + obj_pet.specie.name + "&i=" + i;
 
-        return (
-            <div>
-                <Row>
-                    {
-                        results.map( ( obj, i ) => {
-                            console.log('chegou aki')
-                            return(
-                                <Col span={6} key={i}>
-                                    <div>
+                        return(
+                            
+                                <div>
                                     <Card
-                                        style={{ width: 300 }}
+                                        data-card-result
+                                        cover={<img src={url_image} />}
                                         actions={[
-                                            <p>R$ 88,88</p>,
-                                        <Button>Ver mais</Button>,
+                                            <p>R$ {parseFloat(obj_pet.price).toFixed(2)}</p>,
+                                            <Button>Ver mais</Button>,
                                         ]} >
-                                            <Meta
-                                            avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                            title="Buddy"
-                                            />
-                                            <p>Dog</p>
-                                            <p>Female</p>
-                                            <p>XL</p>
-                                            <p>Senior</p>
-                                            <p>Status disponivel</p>
+
+                                        <Meta title={obj_pet.name} />
+                                        <p>{obj_pet.specie.name}</p>
+                                        <p>{obj_pet.sex_key}</p>
+                                        <p>{obj_pet.size_key}</p>
+                                        <p>{obj_pet.age_key}</p>
+                                        <p>{obj_pet.status_key}</p>
                                             
-                                        </Card>
-                                    </div>
-                                </Col>
-                            );
-                        })
-                    }
-                </Row>
+                                    </Card>
+                                </div>
+                            
+                        );
+                    })
+                }
 
                 {
-                    has_more
-                        ? <Button onClick={ () => { funcLoadMore(); }}>To Load More</Button>
-                        : null
+                    searching
+                    ? this.loadingCards()
+                    : null
                 }
-                
-            </div>
-        )
 
-    } else {
-
-        return (
-            <div>
                 {
-                    searched
-                        ? "There isn`t pets with your preferences"
-                        : "To make a search"
+                    results.length === 0 && searching === false && searched === true
+                    ? this.noResultBlock()
+                    : null
                 }
-            </div>
-        )
-
-    }
+            </Row>
+            
+        </div>
+    )
 
   }
 
@@ -134,29 +144,36 @@ class SearchListResults extends Component {
 
     let { 
         searching,
-        page 
+        page,
+        has_more,
+        searched
     } = this.state;
 
+    let { funcLoadMore } = this.props;
+
     return (
-        <div>
+        <div data-component="search-list-results">
 
             {
-                searching == true && page < 2
-                ? null
+                searching == true && page < 1
+                ? this.loadingCards()
                 : this.processResults()
             }
 
             {
-                searching
-                ? this.loadingCards()
-                : null
+                searched === false
+                    ? this.makeResearchBlock()
+                    : null
+            }
+
+            {
+                has_more && has_more === true
+                    ? <Button data-load-more onClick={ () => { funcLoadMore(); }}>To Load More</Button>
+                    : null
             }
 
         </div>
     )
-    // return searching
-    //         ? this.loadingCards()
-    //         : this.processResults()
 
   }
 }
